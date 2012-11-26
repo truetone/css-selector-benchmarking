@@ -56,7 +56,7 @@ Unless noted, all tests were run on my Macbook Pro with a 2.3 GHz Intel Core i5 
 
 #### Worst 3 Performing Selectors
 
-1. attribute starts-with selector with known attribute, e.g. `[]class^="a"]` (1346%)
+1. attribute starts-with selector with known attribute, e.g. `[class^="a"]` (1346%)
 2. attribute selector with known attribute, e.g. `[title="a"]` (1312%)
 3. attribute selector with unknown attribute, e.g. `[a="b"]` (1306%)
 
@@ -90,7 +90,7 @@ Unless noted, all tests were run on my Macbook Pro with a 2.3 GHz Intel Core i5 
 
 ##Conclusions
 
-In most cases "attribute selector with unknown attribute, e.g. `[a="b"]` and attribute selector with known attribute, e.g. `[title="a"]` showed up in the "3 Worst" category. It's safe to say you should avoid those selectors.
+In most cases 'attribute selector with unknown attribute, e.g. `[a="b"]`' and 'attribute selector with known attribute, e.g. `[title="a"]`' showed up in the '3 Worst' category. It's safe to say you should avoid those selectors.
 
 It's a three-way tie for fastest performance on:
 
@@ -100,7 +100,7 @@ It's a three-way tie for fastest performance on:
 
 That last one is the most surprising and seems to go against conventional wisdom.
 
-I think the best way to look at this is by the *proportion of users* in your audience. Even though the above three selectors offer the best performance across browsers, your users might not be using those.
+I think the best way to look at this is by the *proportion of users* in your audience. Even though the above three selectors offer the best performance across browsers, your users might not be using browser that support them.
 
 For example, the `#id` selector (generally considered the fastest) has poor performance in Firefox 17. If you have a lot of Firefox users in your audience, that's a big performance hit.
 
