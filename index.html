@@ -28,32 +28,115 @@
         </ul>
       </header>
       <section>
-        <h3>Welcome to GitHub Pages.</h3>
+        <h1>Unscientific CSS Selector Benchmarking Tests</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>These tests were all run on <a href="http://scope.bitbucket.org/tests/selector-matching-performance/index.html">Opera's Dragonfly test suite</a>.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<p>Browsers match selectors from right to left. For example, the class <code>#id div ul li a</code> will first try to match all <code>a</code>'s in the document, then all <code>li</code>'s, then all <code>ul</code>'s, etc., until it finally finds the unique <code>#id</code> and begins rendering.</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>This has led to a school of thought that claims using class selectors is the fastest best method for CSS performance. My (admittedly unscientific) tests do not confirm that hypothesis.</p>
 
-<h3>Designer Templates</h3>
+<p>Admittedly, some of the reasoning behind the "CSS classes only" school of thought are part of a work flow for avoiding clashing styles and decoupling style selectors from JavaScript selectors. These tests indicate to me that the jury is still out on whether or not CSS classes deliver superior performance.</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>Unfortunately these tests failed completely in Internet Explorer 9 so there is no data available.</p>
 
-<h3>Rather Drive Stick?</h3>
+<h2>Evironment</h2>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Unless noted, all tests were run on my Macbook Pro with a 2.3 GHz Intel Core i5 processor and 8GB 1333 MHz DDR3 RAM. (I don't have specs on the one Windows result.)</p>
 
-<h3>Authors and Contributors</h3>
+<h2>Results</h2>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p><a href="https://docs.google.com/a/umn.edu/spreadsheet/ccc?key=0AvVcfs0W9L-KdHpWeXg1VlJVMVVpMS1GZDhvQmt0TEE&amp;pli=1#gid=0">Full results here</a>. Run on November 26, 2012.</p>
 
-<h3>Support or Contact</h3>
+<h3>Chrome 25.0.1323.1 dev</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<h4>Best Performing Selectors (&lt; 110% of best)</h4>
+
+<ol>
+<li>class selector with pseudo class not, e.g. <code>.a:not(a)</code> (100%)</li>
+<li>class selector, e.g. <code>.a</code> (100%)</li>
+<li>class selector with attribute selector, e.g. <code>.a[b]</code> (103%)</li>
+<li>id selector, e.g. <code>#a</code> (105%)</li>
+</ol><h4>Worst 3 Performing Selectors</h4>
+
+<ol>
+<li>attribute selector with unknown attribute, e.g. <code>[a="b"]</code> (324%)</li>
+<li>attribute starts-with selector with known attribute, e.g. <code>[class^="a"]</code> (314%)</li>
+<li>attribute selector with unknown attribute without value, e.g. <code>[a]</code> (313%)</li>
+</ol><h3>Opera 11.11</h3>
+
+<h4>Best Performing Selectors (&lt; 110% of best)</h4>
+
+<ol>
+<li>tag selector, e.g. a (100%)</li>
+<li>class selector with pseudo class nth-child, e.g. <code>.a:nth-child(odd)</code> (100%)</li>
+<li>no additional style (102%)</li>
+</ol><h4>Worst 3 Performing Selectors</h4>
+
+<ol>
+<li>attribute selector with unknown attribute, e.g. <code>[a="b"</code>] (1531%)</li>
+<li>attribute selector with unknown attribute without value, e.g. <code>[a]</code> (675%)</li>
+<li>attribute starts-with selector with known attribute, e.g. <code>[class^="a"]</code> (380%)</li>
+</ol><h3>Firefox 16 (Windows 7)</h3>
+
+<h4>Best Performing Selectors (&lt; 110% of best)</h4>
+
+<ol>
+<li>class selector with pseudo class nth-child, e.g. <code>.a:nth-child(odd)</code> (100%)</li>
+<li>tag selector, e.g. <code>a</code> (102%)</li>
+<li>id selector, e.g. <code>#a</code> (106%)</li>
+</ol><h4>Worst 3 Performing Selectors</h4>
+
+<ol>
+<li>attribute starts-with selector with known attribute, e.g. <code>[class^="a"]</code> (1346%)</li>
+<li>attribute selector with known attribute, e.g. <code>[title="a"]</code> (1312%)</li>
+<li>attribute selector with unknown attribute, e.g. <code>[a="b"]</code> (1306%)</li>
+</ol><h3>Firefox 17</h3>
+
+<h4>Best Performing Selectors (&lt; 110% of best)</h4>
+
+<ol>
+<li>no additional style (100%)</li>
+<li>class selector, e.g. <code>.a</code> (102%)</li>
+</ol><h4>Worst 3 Performing Selectors</h4>
+
+<ol>
+<li>tag selector, e.g. <code>a</code> (400%)</li>
+<li>id selector, e.g. <code>#a</code> (294%)</li>
+<li>class selector with attribute selector, e.g. <code>.a[b]</code> (286%)</li>
+</ol><h3>Safari 6.02</h3>
+
+<h4>Best Performing Selectors (&lt; 110% of best)</h4>
+
+<ol>
+<li>no additional style (100%)</li>
+<li>class selector, e.g. <code>.a</code> (101%)</li>
+<li>class selector with pseudo class nth-child, e.g. <code>.a:nth-child(odd)</code> (101%)</li>
+<li>id selector, e.g. <code>#a</code> (103%)</li>
+</ol><h4>Worst 3 Performing Selectors</h4>
+
+<ol>
+<li>attribute selector with unknown attribute, e.g. <code>[a="b"]</code> (516%)</li>
+<li>attribute starts-with selector with known attribute, e.g. <code>[class^="a"]</code> (494%)</li>
+<li>attribute selector with known attribute, e.g. <code>[title="a"]</code> (477%)</li>
+</ol><h2>Conclusions</h2>
+
+<p>In most cases "attribute selector with unknown attribute, e.g. <code>[a="b"]</code> and attribute selector with known attribute, e.g. <code>[title="a"]</code> showed up in the "3 Worst" category. It's safe to say you should avoid those selectors.</p>
+
+<p>It's a three-way tie for fastest performance on:</p>
+
+<ul>
+<li>class selector, e.g. <code>.a</code>
+</li>
+<li>id selector, e.g. <code>#a</code>
+</li>
+<li>class selector with pseudo class nth-child, e.g. <code>.a:nth-child(odd)</code>
+</li>
+</ul><p>That last one is the most surprising and seems to go against conventional wisdom.</p>
+
+<p>I think the best way to look at this is by the <em>proportion of users</em> in your audience. Even though the above three selectors offer the best performance across browsers, your users might not be using those.</p>
+
+<p>For example, the <code>#id</code> selector (generally considered the fastest) has poor performance in Firefox 17. If you have a lot of Firefox users in your audience, that's a big performance hit.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/truetone">truetone</a></p>
