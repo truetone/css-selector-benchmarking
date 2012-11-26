@@ -23,14 +23,14 @@ Unless noted, all tests were run on my Macbook Pro with a 2.3 GHz Intel Core i5 
 
 1. class selector with pseudo class not, e.g. `.a:not(a)` (100%)
 2. class selector, e.g. `.a` (100%)
-3. class selector with attribute selector, e.g. `.a\[b\]` (103%)
+3. class selector with attribute selector, e.g. `.a[b]` (103%)
 4. id selector, e.g. `#a` (105%)
 
 #### Worst 3 Performing Selectors
 
-1. attribute selector with unknown attribute, e.g. `\[a="b"\]` (324%)
-2. attribute starts-with selector with known attribute, e.g. `\[class^="a"\]` (314%)
-3. attribute selector with unknown attribute without value, e.g. `\[a\]` (313%)
+1. attribute selector with unknown attribute, e.g. `[a="b"]` (324%)
+2. attribute starts-with selector with known attribute, e.g. `[class^="a"]` (314%)
+3. attribute selector with unknown attribute without value, e.g. `[a]` (313%)
 
 ### Opera 11.11
 
@@ -42,9 +42,9 @@ Unless noted, all tests were run on my Macbook Pro with a 2.3 GHz Intel Core i5 
 
 #### Worst 3 Performing Selectors
 
-1. attribute selector with unknown attribute, e.g. `\[a="b"\`] (1531%)
-2. attribute selector with unknown attribute without value, e.g. `\[a\]` (675%)
-3. attribute starts-with selector with known attribute, e.g. `\[class^="a"\]` (380%)
+1. attribute selector with unknown attribute, e.g. `[a="b"`] (1531%)
+2. attribute selector with unknown attribute without value, e.g. `[a]` (675%)
+3. attribute starts-with selector with known attribute, e.g. `[class^="a"]` (380%)
 
 ### Firefox 16 (Windows 7)
 
@@ -56,9 +56,9 @@ Unless noted, all tests were run on my Macbook Pro with a 2.3 GHz Intel Core i5 
 
 #### Worst 3 Performing Selectors
 
-1. attribute starts-with selector with known attribute, e.g. `\[class^="a"\]` (1346%)
-2. attribute selector with known attribute, e.g. `\[title="a"\]` (1312%)
-3. attribute selector with unknown attribute, e.g. `\[a="b"\]` (1306%)
+1. attribute starts-with selector with known attribute, e.g. `[]class^="a"]` (1346%)
+2. attribute selector with known attribute, e.g. `[title="a"]` (1312%)
+3. attribute selector with unknown attribute, e.g. `[a="b"]` (1306%)
 
 ### Firefox 17
 
@@ -71,7 +71,7 @@ Unless noted, all tests were run on my Macbook Pro with a 2.3 GHz Intel Core i5 
 
 1. tag selector, e.g. `a` (400%)
 2. id selector, e.g. `#a` (294%)
-3. class selector with attribute selector, e.g. `.a\[b\]` (286%)
+3. class selector with attribute selector, e.g. `.a[b]` (286%)
 
 ### Safari 6.02
 
@@ -84,13 +84,13 @@ Unless noted, all tests were run on my Macbook Pro with a 2.3 GHz Intel Core i5 
 
 #### Worst 3 Performing Selectors
 
-1. attribute selector with unknown attribute, e.g. `\[a="b"\]` (516%)
-2. attribute starts-with selector with known attribute, e.g. `\[class^="a"\]` (494%)
-3. attribute selector with known attribute, e.g. `\[title="a"\]` (477%)
+1. attribute selector with unknown attribute, e.g. `[a="b"]` (516%)
+2. attribute starts-with selector with known attribute, e.g. `[class^="a"]` (494%)
+3. attribute selector with known attribute, e.g. `[title="a"]` (477%)
 
 ##Conclusions
 
-In most cases "attribute selector with unknown attribute, e.g. `\[a="b"\]` and attribute selector with known attribute, e.g. `\[title="a"\]` showed up in the "3 Worst" category. It's safe to say you should avoid those selectors.
+In most cases "attribute selector with unknown attribute, e.g. `[a="b"]` and attribute selector with known attribute, e.g. `[title="a"]` showed up in the "3 Worst" category. It's safe to say you should avoid those selectors.
 
 It's a three-way tie for fastest performance on:
 
